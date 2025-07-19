@@ -32,10 +32,8 @@ export default function Home() {
 						{/* copyright */}
 						<div>
 							<div className="text-xs semi-bold">Blott.io ltd</div>
-							<div className="text-[8px]">
-								<span className="text-secondary">
-									&copy; {new Date().getFullYear()}{" "}
-								</span>{" "}
+							<div className="text-[8px] text-secondary">
+								&copy; {new Date().getFullYear()}
 								Blott.io ltd. All rights reserved.
 							</div>
 						</div>

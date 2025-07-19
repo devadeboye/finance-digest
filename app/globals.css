@@ -4,15 +4,13 @@
   --color-primary: #55ACEE;
   --background: #010101;
   --foreground: #ffffff;
-  --secondary: #828282;
-  --text-secondary: #828282;
+  --secondary: rgba(255,255,255,0.7);
 }
 
 @theme inline {
   --font-rubik: var(--font-rubik);
   --color-primary: var(--color-primary);
   --color-secondary: var(--secondary);
-  --color-text-secondary: var(--text-secondary);
   --background: var(--background);
   --secondary: var(--secondary);
   --foreground: var(--foreground);
