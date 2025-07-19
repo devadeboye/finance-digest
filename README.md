@@ -47,3 +47,6 @@ The application will be available at `http://localhost:3000`.
 
 -   [home](http://localhost:3000).
 -   [news](http://localhost:3000/news).
+
+finnhub docs
+https://finnhub.io/docs/api/market-news
