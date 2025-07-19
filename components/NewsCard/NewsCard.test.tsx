@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import NewsCard from "./NewsCard";
+import NewsCard from "./index";
 
 describe("NewsCard", () => {
 	const mockProps = {

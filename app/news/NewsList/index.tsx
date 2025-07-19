@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import NewsCard from "./NewsCard";
+import NewsCard from "@/components/NewsCard";
 import { useGeneralNews, newsKeys } from "@/lib/hooks/use-news";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQueryClient } from "@tanstack/react-query";
@@ -43,7 +43,11 @@ export default function NewsList() {
 		return (
 			<div className="flex flex-col gap-4 md:grid md:gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 animate-pulse">
 				{[...Array(8)].map((_, i) => (
-					<div key={i} className="h-[250px] bg-[#111] rounded-lg" />
+					<div
+						key={i}
+						className="h-[250px] bg-[#111] rounded-lg"
+						data-testid="skeleton-item"
+					/>
 				))}
 			</div>
 		);
