@@ -14,19 +14,31 @@ export default function NewsList() {
 		? news.filter((news) => news.url && news.image)
 		: [];
 
-	// Set up virtualizer
+	// Set up virtualizer with dynamic sizing
 	const virtualizer = useVirtualizer({
 		count: validNews.length,
 		getScrollElement: () => parentRef.current,
-		estimateSize: () => 150,
-		overscan: 5,
+		estimateSize: () => 250, // Increased estimate for better accuracy
+		overscan: 10, // Increased overscan to pre-render more items
+		scrollMargin: 150, // Add margin to trigger earlier loading
 	});
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading)
+		return (
+			<div className="flex flex-col gap-4 animate-pulse">
+				{[...Array(8)].map((_, i) => (
+					<div key={i} className="h-[250px] bg-[#111] rounded-lg" />
+				))}
+			</div>
+		);
+
 	if (error) return <div>Error: {error.message}</div>;
 
 	return (
-		<div ref={parentRef} className="h-[calc(100vh-200px)] overflow-auto">
+		<div
+			ref={parentRef}
+			className="h-[calc(100vh-200px)] overflow-auto scroll-smooth"
+		>
 			<div className="flex flex-col gap-4 md:grid md:gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 				{virtualizer.getVirtualItems().map((virtualItem) => {
 					const news = validNews[virtualItem.index];

@@ -23,14 +23,15 @@ export default function NewsCard({
 	});
 
 	return (
-		<div className="flex flex-row gap-4 w-full md:flex-col p-2">
-			<div className="w-[100px] h-[100px] flex-shrink-0 md:w-auto md:h-auto">
+		<div className="flex flex-row gap-4 w-full md:flex-col p-2 bg-[#111] rounded-lg transition-transform hover:scale-[1.02]">
+			<div className="relative w-[100px] h-[100px] flex-shrink-0 md:w-auto md:h-[200px] bg-[#222] rounded-md overflow-hidden">
 				<Image
 					src={thumbnail}
 					alt={title}
-					className="object-cover w-full h-full"
-					width={100}
-					height={100}
+					className="object-cover"
+					fill
+					sizes="(max-width: 768px) 100px, (max-width: 1200px) 50vw, 33vw"
+					loading="lazy"
 				/>
 			</div>
 
