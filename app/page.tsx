@@ -1,22 +1,23 @@
 import Button from "@/components/Button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
 	return (
 		<main className="h-svh flex justify-center items-center">
 			<div className="flex flex-col justify-between gap-32 lg:w-3/5">
 				<div className="flex flex-col gap-10 h-full">
-					<div className="text-3xl">Blott Studio</div>
+					<div className="text-2xl md:text-3xl">Blott Studio</div>
 
-					<div className="text-7xl font-bold">Web Assessment</div>
+					<div className="text-4xl md:text-7xl font-bold">Web Assessment</div>
 
-					<div className="text-3xl font-bold text-secondary">
+					<div className="text-2xl md:text-3xl font-bold text-secondary">
 						Finance Digest
 					</div>
 				</div>
 
 				{/* cta section */}
-				<div className="flex h-full justify-between">
+				<div className="flex h-full flex-col gap-4 md:gap-0 md:flex-row md:justify-between">
 					<div className="flex flex-row gap-4">
 						{/* logo */}
 						<div className="h-8">
@@ -39,7 +40,9 @@ export default function Home() {
 						</div>
 					</div>
 
-					<Button label="Ready" />
+					<Link href="/news">
+						<Button label="Ready" />
+					</Link>
 				</div>
 			</div>
 		</main>

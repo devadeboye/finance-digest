@@ -40,7 +40,12 @@ export default function NewsCard({
 					<div>{dateString}</div>
 				</div>
 
-				<Link href={link}>
+				<Link
+					href={link}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="hover:underline"
+				>
 					<h2 className="text-lg font-bold line-clamp-3">{title}</h2>
 				</Link>
 			</div>
