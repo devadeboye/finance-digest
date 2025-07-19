@@ -1,8 +1,19 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useState } from "react";
+import dynamic from "next/dynamic";
+
+// Dynamically import DevTools to reduce initial bundle size
+const ReactQueryDevtools = dynamic(
+	() =>
+		import("@tanstack/react-query-devtools").then(
+			(mod) => mod.ReactQueryDevtools
+		),
+	{
+		ssr: false,
+	}
+);
 
 export function QueryProvider({ children }: { children: React.ReactNode }) {
 	const [queryClient] = useState(
@@ -10,12 +21,13 @@ export function QueryProvider({ children }: { children: React.ReactNode }) {
 			new QueryClient({
 				defaultOptions: {
 					queries: {
-						staleTime: 5 * 60 * 1000, // i did this to reduces unnecessary API calls since this is a demo app
-						gcTime: 10 * 60 * 1000, // i did this to reduces unnecessary API calls since this is a demo app
+						staleTime: 5 * 60 * 1000, // 5 minutes
+						gcTime: 10 * 60 * 1000, // 10 minutes
 						retry: 1,
 						refetchOnWindowFocus: false,
 						retryDelay: (attemptIndex) =>
 							Math.min(1000 * 2 ** attemptIndex, 30000),
+						refetchOnMount: false,
 					},
 					mutations: {
 						retry: 1,

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { memo } from "react";
 
 interface NewsCardProps {
 	title: string;
@@ -9,13 +10,7 @@ interface NewsCardProps {
 	source: string;
 }
 
-export default function NewsCard({
-	title,
-	date,
-	thumbnail,
-	link,
-	source,
-}: NewsCardProps) {
+function NewsCard({ title, date, thumbnail, link, source }: NewsCardProps) {
 	const dateString = new Date(date * 1000).toLocaleDateString("en-US", {
 		month: "short",
 		day: "numeric",
@@ -32,6 +27,8 @@ export default function NewsCard({
 					fill
 					sizes="(max-width: 768px) 100px, (max-width: 1200px) 50vw, 33vw"
 					loading="lazy"
+					quality={75}
+					priority={false}
 				/>
 			</div>
 
@@ -53,3 +50,6 @@ export default function NewsCard({
 		</div>
 	);
 }
+
+// Memoize the component to prevent unnecessary re-renders
+export default memo(NewsCard);
