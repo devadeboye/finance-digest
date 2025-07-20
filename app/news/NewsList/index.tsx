@@ -1,16 +1,18 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import NewsCard from "@/components/NewsCard";
 import { useGeneralNews, newsKeys } from "@/lib/hooks/use-news";
-import { useVirtualizer } from "@tanstack/react-virtual";
 import { useQueryClient } from "@tanstack/react-query";
 import { newsApi } from "@/lib/api/news-api";
+
+const ITEMS_PER_PAGE = 20;
 
 export default function NewsList() {
 	const queryClient = useQueryClient();
 	const { data: news, isLoading, error } = useGeneralNews();
-	const parentRef = useRef<HTMLDivElement>(null);
+	const [currentPage, setCurrentPage] = useState(1);
+	const containerRef = useRef<HTMLDivElement>(null);
 
 	// Prefetch news data
 	useEffect(() => {
@@ -40,19 +42,25 @@ export default function NewsList() {
 		  })
 		: [];
 
-	console.log("Total news items:", news?.length);
-	console.log("Valid news items:", validNews.length);
+	// Calculate pagination
+	const totalPages = Math.ceil(validNews.length / ITEMS_PER_PAGE);
+	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+	const endIndex = startIndex + ITEMS_PER_PAGE;
 
-	// Set up virtualizer with optimized settings
-	const virtualizer = useVirtualizer({
-		count: validNews.length,
-		getScrollElement: () => parentRef.current,
-		estimateSize: () => 100,
-		overscan: 20,
-	});
+	// Load all items up to current page for smooth scrolling
+	const allNewsToShow = validNews.slice(0, endIndex);
 
-	const virtualItems = virtualizer.getVirtualItems();
-	console.log("Virtual items:", virtualItems.length);
+	const handleScroll = () => {
+		if (!containerRef.current) return;
+
+		const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+		const scrollPercentage = (scrollTop + clientHeight) / scrollHeight;
+
+		// Load more when user scrolls to 80% of the content
+		if (scrollPercentage > 0.8 && currentPage < totalPages) {
+			setCurrentPage((prev) => prev + 1);
+		}
+	};
 
 	if (isLoading)
 		return (
@@ -71,24 +79,29 @@ export default function NewsList() {
 
 	return (
 		<div
-			ref={parentRef}
+			ref={containerRef}
 			className="h-[calc(100vh-200px)] overflow-auto scroll-smooth px-4 md:px-10"
+			onScroll={handleScroll}
 		>
 			<div className="flex flex-col gap-4 md:grid md:gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-				{virtualItems.map((virtualItem) => {
-					const news = validNews[virtualItem.index];
-					return (
-						<NewsCard
-							key={news.id}
-							title={news.headline}
-							date={news.datetime}
-							thumbnail={news.image}
-							link={news.url}
-							source={news.source}
-						/>
-					);
-				})}
+				{allNewsToShow.map((news) => (
+					<NewsCard
+						key={news.id}
+						title={news.headline}
+						date={news.datetime}
+						thumbnail={news.image}
+						link={news.url}
+						source={news.source}
+					/>
+				))}
 			</div>
+
+			{/* Loading indicator */}
+			{currentPage < totalPages && (
+				<div className="flex justify-center py-8">
+					<div className="text-secondary">Loading more news...</div>
+				</div>
+			)}
 		</div>
 	);
 }
