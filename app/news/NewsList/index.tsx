@@ -22,7 +22,22 @@ export default function NewsList() {
 
 	// Filter valid news items (with url and image)
 	const validNews = Array.isArray(news)
-		? news.filter((news) => news.url && news.image)
+		? news.filter((news) => {
+				// Check if URL and image exist
+				const hasValidUrl = news.url && news.url.trim() !== "";
+				const hasValidImage = news.image && news.image.trim() !== "";
+
+				// Additional check for common image domains that might fail
+				const isReliableImage =
+					hasValidImage &&
+					(news.image.includes("static2.finnhub.io") ||
+						news.image.includes("reuters.com") ||
+						news.image.includes("bloomberg.com") ||
+						news.image.includes("wsj.net") ||
+						news.image.includes("ft.com"));
+
+				return hasValidUrl && (hasValidImage || isReliableImage);
+		  })
 		: [];
 
 	console.log("Total news items:", news?.length);

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import NewsCard from "./index";
 
 describe("NewsCard", () => {
@@ -32,5 +32,20 @@ describe("NewsCard", () => {
 		const image = screen.getByRole("img");
 		expect(image).toHaveAttribute("alt", mockProps.title);
 		expect(image).toHaveAttribute("src");
+	});
+
+	it("shows fallback when image fails to load", () => {
+		render(<NewsCard {...mockProps} />);
+
+		// Initially shows image
+		const image = screen.getByRole("img");
+		expect(image).toBeInTheDocument();
+
+		// Simulate image error
+		fireEvent.error(image);
+
+		// Should show fallback message
+		expect(screen.getByText("Image unavailable")).toBeInTheDocument();
+		expect(screen.queryByRole("img")).not.toBeInTheDocument();
 	});
 });
