@@ -10,10 +10,6 @@ jest.mock("@/lib/hooks/use-news", () => ({
 	},
 }));
 
-jest.mock("@tanstack/react-virtual", () => ({
-	useVirtualizer: jest.fn(),
-}));
-
 jest.mock("@/lib/api/news-api", () => ({
 	newsApi: {
 		getGeneralNews: jest.fn(),
@@ -22,7 +18,6 @@ jest.mock("@/lib/api/news-api", () => ({
 
 // Import mocks after jest.mock
 import { useGeneralNews } from "@/lib/hooks/use-news";
-import { useVirtualizer } from "@tanstack/react-virtual";
 
 // Create a wrapper with QueryClient
 const createWrapper = () => {
@@ -72,10 +67,6 @@ describe("NewsList", () => {
 			error: null,
 		});
 
-		(useVirtualizer as jest.Mock).mockReturnValue({
-			getVirtualItems: () => [],
-		});
-
 		render(<NewsList />, { wrapper: createWrapper() });
 
 		// Check for loading skeleton
@@ -90,10 +81,6 @@ describe("NewsList", () => {
 			error: { message: "Failed to fetch news" },
 		});
 
-		(useVirtualizer as jest.Mock).mockReturnValue({
-			getVirtualItems: () => [],
-		});
-
 		render(<NewsList />, { wrapper: createWrapper() });
 
 		expect(screen.getByText("Error: Failed to fetch news")).toBeInTheDocument();
@@ -104,13 +91,6 @@ describe("NewsList", () => {
 			data: mockNews,
 			isLoading: false,
 			error: null,
-		});
-
-		(useVirtualizer as jest.Mock).mockReturnValue({
-			getVirtualItems: () => [
-				{ index: 0, start: 0, size: 250 },
-				{ index: 1, start: 250, size: 250 },
-			],
 		});
 
 		render(<NewsList />, { wrapper: createWrapper() });
@@ -143,13 +123,6 @@ describe("NewsList", () => {
 			data: invalidNews,
 			isLoading: false,
 			error: null,
-		});
-
-		(useVirtualizer as jest.Mock).mockReturnValue({
-			getVirtualItems: () => [
-				{ index: 0, start: 0, size: 250 },
-				{ index: 1, start: 250, size: 250 },
-			],
 		});
 
 		render(<NewsList />, { wrapper: createWrapper() });

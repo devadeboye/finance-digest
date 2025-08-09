@@ -10,15 +10,15 @@ const rubik = Rubik({
 
 export const metadata: Metadata = {
 	title: {
-		default: "Blott Studio - Finance Digest App",
-		template: "%s | Blott Studio",
+		default: "Finance Digest - Devadeboye Portfolio",
+		template: "%s | Finance Digest",
 	},
 	description:
-		"A finance digest app that helps you stay on top of your finances.",
-	keywords: ["finance", "digest", "app", "blott", "studio"],
+		"A portfolio project showcasing curated finance news built with Next.js, React 19, and TanStack Query.",
+	keywords: ["finance", "digest", "app", "portfolio", "nextjs", "react"],
 	authors: [{ name: "Devadeboye" }],
-	creator: "Blott Studio",
-	publisher: "Blott Studio",
+	creator: "Devadeboye",
+	publisher: "Devadeboye",
 	robots: {
 		index: true,
 		follow: true,
@@ -26,16 +26,16 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		title: "Blott Studio - Finance Digest App",
+		title: "Finance Digest - Devadeboye Portfolio",
 		description:
-			"A finance digest app that helps you stay on top of your finances.",
-		siteName: "Blott Studio",
+			"A portfolio project showcasing curated finance news built with Next.js, React 19, and TanStack Query.",
+		siteName: "Finance Digest",
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Blott Studio - Finance Digest App",
+		title: "Finance Digest - Devadeboye Portfolio",
 		description:
-			"A finance digest app that helps you stay on top of your finances.",
+			"A portfolio project showcasing curated finance news built with Next.js, React 19, and TanStack Query.",
 	},
 };
 

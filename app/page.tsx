@@ -7,12 +7,12 @@ export default function Home() {
 		<main className="h-svh flex justify-center items-center">
 			<div className="flex flex-col justify-between gap-32 lg:w-3/5">
 				<div className="flex flex-col gap-10 h-full">
-					<div className="text-2xl md:text-3xl">Blott Studio</div>
+					<div className="text-2xl md:text-3xl">Devadeboye</div>
 
-					<div className="text-4xl md:text-7xl font-bold">Web Assessment</div>
+					<div className="text-4xl md:text-7xl font-bold">Finance Digest</div>
 
 					<div className="text-2xl md:text-3xl font-bold text-secondary">
-						Finance Digest
+						Curated finance news
 					</div>
 				</div>
 
@@ -32,16 +32,16 @@ export default function Home() {
 
 						{/* copyright */}
 						<div>
-							<div className="text-xs semi-bold">Blott.io ltd</div>
+							<div className="text-xs semi-bold">Devadeboye</div>
 							<div className="text-[8px] text-secondary">
-								&copy; {new Date().getFullYear()}
-								Blott.io ltd. All rights reserved.
+								&copy; {new Date().getFullYear()} Devadeboye. All rights
+								reserved.
 							</div>
 						</div>
 					</div>
 
 					<Link href="/news">
-						<Button label="Ready" />
+						<Button label="Explore News" />
 					</Link>
 				</div>
 			</div>
