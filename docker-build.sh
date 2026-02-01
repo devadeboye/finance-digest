@@ -13,7 +13,7 @@ FULL_TAG="$VERSION-$GIT_HASH"
 echo "Building version: $VERSION (Git: $GIT_HASH)"
 
 docker buildx build \
-  --platform linux/amd64,linux/arm64 \
+  --platform linux/arm64 \
   --provenance=false \
   --sbom=false \
   -t $ECR_URI:$VERSION \
