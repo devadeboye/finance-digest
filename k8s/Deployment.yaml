@@ -18,7 +18,7 @@ spec:
       - name: regcred
       containers:
         - name: finance-digest
-          image: 671022928530.dkr.ecr.eu-west-2.amazonaws.com/devadeboye/finance-digest:0.1.1
+          image: 671022928530.dkr.ecr.eu-west-2.amazonaws.com/devadeboye/finance-digest:0.1.2
           imagePullPolicy: Always
           ports:
           - containerPort: 3001
