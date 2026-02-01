@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: finance-digest-service
+  labels:
+    app: finance-digest
+spec:
+  selector:
+    app: finance-digest
+  ports:
+    - protocol: TCP
+      port: 81
+      targetPort: 3001
+  type: ClusterIP
