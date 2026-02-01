@@ -21,3 +21,4 @@ types
 
 # k8s
 k8s/
+docker-build.sh
