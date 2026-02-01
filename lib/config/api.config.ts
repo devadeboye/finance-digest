@@ -1,18 +1,5 @@
-const getApiUrl = (): string => {
-	const apiUrl = process.env.NEXT_PUBLIC_FINNHUB_API_URL;
-
-	if (!apiUrl) {
-		console.warn(
-			"NEXT_PUBLIC_FINNHUB_API_URL is not defined, falling back to localhost:4000"
-		);
-		return "http://localhost:4000";
-	}
-	return apiUrl;
-};
-
 export const API_CONFIG = {
-	BASE_URL: getApiUrl(),
-	TOKEN: process.env.NEXT_PUBLIC_FINNHUB_API_KEY,
+	BASE_URL: "/api/proxy",
 	ENDPOINTS: {
 		// news endpoints
 		NEWS: {
@@ -25,7 +12,7 @@ export const API_CONFIG = {
 } as const;
 
 export const buildApiUrl = (endpoint: string): string => {
-	return `${API_CONFIG.BASE_URL}${endpoint}&token=${API_CONFIG.TOKEN}`;
+	return `${API_CONFIG.BASE_URL}${endpoint}`;
 };
 
 export default API_CONFIG;
